@@ -58,11 +58,14 @@ class UrlChecker:
                 self.callback(title, link)
 
 def on_change(title, link):
-    api_key = read_file('api_key').strip()
-    pb = Pushbullet(api_key)
-
     print('NEW: ' + title)
-    pb.push_link(title, link)
+
+    api_key = read_file('api_key').strip()
+    if api_key:
+        pb = Pushbullet(api_key)
+        pb.push_link(title, link)
+    else:
+        print('No api_key file available. Push not sent')
 
 if __name__ == '__main__':
     if len (sys.argv) < 5:
