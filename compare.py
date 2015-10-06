@@ -24,7 +24,7 @@ class UrlChecker:
 
     def __init__(self, url, parser_re, title_id, link_id, force, callback):
         self.url = url
-        self.url_path = re.sub('[:/.?&]', '', url)
+        self.url_path = re.sub('[:/.?&]', '', url) + ".cache"
         self.title_id = title_id
         self.link_id = link_id
         self.parser_re = parser_re
