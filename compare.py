@@ -1,5 +1,5 @@
 from pushbullet import Pushbullet
-import urllib.request
+import urllib2
 import re
 import os
 import sys
@@ -32,7 +32,7 @@ class UrlChecker:
         self.force = force
 
     def fetch(self):
-        return urllib.request.urlopen(url).read().decode('utf-8')
+        return urllib2.urlopen(url).read().decode('utf-8')
 
     def parse(self, contents):
        return re.search(self.parser_re, contents)
