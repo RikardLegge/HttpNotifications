@@ -3,6 +3,7 @@ import urllib2
 import re
 import os
 import sys
+import HTMLParser
 
 
 def read_file(path):
@@ -53,15 +54,16 @@ class UrlChecker:
             title = new.group(self.title_id)
             link = new.group(self.link_id)
 
+            if not link:
+                link = self.url
+
             if old != link or self.force:
                 write_file(self.url_path,link)
                 self.callback(title, link)
 
 def on_change(title, link):
-    title = title.encode('ascii', 'ignore')
-    link = link.encode('ascii', 'ignore')
-
-    print('NEW:' + title + ' (' + link + ')')
+    h = HTMLParser.HTMLParser()
+    title = h.unescape(title)
 
     api_key = read_file('api_key').strip()
     if api_key:
