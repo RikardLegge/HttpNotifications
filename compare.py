@@ -1,9 +1,9 @@
 from pushbullet import Pushbullet
+from HTMLParser import HTMLParser
 import urllib2
 import re
 import os
 import sys
-import HTMLParser
 
 
 def read_file(path):
@@ -62,10 +62,11 @@ class UrlChecker:
                 self.callback(title, link)
 
 def on_change(title, link):
-    api_key = read_file('api_key').strip()
+    title = HTMLParser().unescape(title)
+    api_key = read_file('api_key')
 
     if api_key:
-        pb = Pushbullet(api_key)
+        pb = Pushbullet(api_key.strip())
         pb.push_link(title, link)
     else:
         print('No api_key file available. Push not sent')
