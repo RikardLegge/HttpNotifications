@@ -1,1 +1,1 @@
-python compare.py "http://www.kmemotivation.wordpress.com/" "article id(?:[^>]*>){3}[^\"]*\"([^\"]*)[^>]*>([^<]*)" 2 1 $1
+python compare.py "http://www.kmemotivation.wordpress.com/feed" "<item>[^<]*<title>([^<]*)<[^<]*<link>([^<]*)" 1 2 $1
