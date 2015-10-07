@@ -54,7 +54,7 @@ class UrlChecker:
             title = new.group(self.title_id)
             link = new.group(self.link_id)
 
-            if not link:
+            if link == None:
                 link = self.url
 
             if old != link or self.force:
@@ -62,10 +62,8 @@ class UrlChecker:
                 self.callback(title, link)
 
 def on_change(title, link):
-    h = HTMLParser.HTMLParser()
-    title = h.unescape(title)
-
     api_key = read_file('api_key').strip()
+
     if api_key:
         pb = Pushbullet(api_key)
         pb.push_link(title, link)
