@@ -58,7 +58,10 @@ class UrlChecker:
                 self.callback(title, link)
 
 def on_change(title, link):
-    print('NEW: ' + title)
+    title = title.encode('ascii', 'ignore')
+    link = link.encode('ascii', 'ignore')
+
+    print('NEW:' + title + ' (' + link + ')')
 
     api_key = read_file('api_key').strip()
     if api_key:
